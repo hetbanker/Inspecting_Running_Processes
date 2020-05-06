@@ -1,0 +1,54 @@
+0.
+For this you just have to run the executable file 0 by “ltrace ./0”  and it will give you the secret code.
+1.
+For this I had to:
+* I ran the “ltrace ./1” command on the 1 executable file
+* Then It gave me information about the 2 functions, rand() and srand()
+* After the two functions, it prints that the I have to enter the random number that it generates
+* Every-time I ran the executable file, I noticed that the only number that changes every-time 
+   is the number that the rand() function generates
+* Then I noticed that the number is in the hexadecimal, then I converted that number to decimal.
+* After the it unlocked the secret code.
+2.
+For this one I had to:
+* First I ran the “ltrace ./2” command on the executable file
+* Then it gave me message saying that is the curl_easy_perform function was successful then,
+   the password is the some CURL code without the quotes.
+* We then notice that the return value for the curl_easy_perform is the 0 then means that function 
+   was ran successfully, so no errors.
+* Then by the single google search, we noticed that the secret code would be CURLE_OK since 
+  the return value was 0.
+3.
+For this one I had to:
+* When I ran the “ltrace ./3”, it gave me an error saying that the I do not have a file called “iamspecial”
+   so then I had to create a file name “iamspecial”.
+* After I created a file, I ran the ltrace ./3 again and it gave me error saying, I do not have the access   
+  rights.
+* Simple good search reveals that I can either run “chmod +x iamspecial” or “chmod 777 iamspecial”,
+   in my case I ran the “chmod +x iamspecial” and it gave me the secret code.
+4.
+This one took me a while to figure out.
+* Firstly I tried doing ltrace ./4 but it gave me an error saying that it cannpt find the lib361.so file.
+* So I directly created the lib361.so, it still gave me the same error.
+* Then I need to make the lib361.so using the gcc commands. So to do that I ran this three commans. I got  this  commands from the lab 3 handout and also from this website: https://www.cprogramming.com/tutorial/shared-libraries-linux-gcc.html
+  $ gcc -c -Wall -Werror -fpic 361.c
+  $ gcc -shared -o lib361.so 361.o
+  $ gcc -Wall -o test main.c -l361
+* I then linked my main.c, 361.c and 361.h using the gcc commands.
+* Then I gave my path to find where the lib361.so file is located by using this command.
+  $ gcc -L/AD-home/hbanke2/hw2-hetbanker -Wall -o test main.c -l361
+  $ echo $LD_LIBRARY_PATH
+  $ LD_LIBRARY_PATH=/AD-home/hbanke2/hw2-hetbanker 
+  $ LD_LIBRARY_PATH=/AD-home/hbanke2/hw2-hetbanker:$LD_LIBRARY_PATH
+  $ export LD_LIBRARY_PATH=/AD-home/hbanke2/hw2-hetbanker:$LD_LIBRARY_PATH
+* After using this commands, when I ran the ltrace ./4 command, it said the I was missing the secretoperation() function. So I created a secretfunction() with some random code inside it.
+* When I then ran the ltrace ./4 command, it saud that the return value for my function is different from the value 
+  that the secretoperation() was giving me.
+* After doing some math, I realazized that the function is taking 2 values and it is supposed to return sum of 2 parameters values + 1. So in my case, when I returned x + y +1. And I reran the command it worked for me.
+
+
+
+
+
+
+
